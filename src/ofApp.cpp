@@ -17,11 +17,11 @@ void ofApp::draw(){
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     ofNoFill();
-    if(mode == '1'){
+    if(mode1){
         drawMode1(ofGetWidth()/2, ofGetHeight()/2, 4, 0);
-    }else if(mode == '2'){
+    } if(mode2){
         drawMode2(200, 10, ofGetWidth()/2, ofGetHeight()-50, 30, 0);
-    }else if(mode == '3') {
+    } if(mode3) {
         drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, 10, 0);
     }
 }
@@ -81,18 +81,19 @@ void ofApp::keyPressed(int key){
     switch(key){
         case '1':
             setLevelColors();
-            mode = '1';
+            mode1 = !mode1;
             break;
         case '2':
             setLevelColors();
-            mode = '2';
+            mode2 = !mode2;
             break;
         case '3':
             setLevelColors();
-            mode = '3';
+            mode3 = !mode3;
             break;
         case '4':
-            mode = '4';
+            setLevelColors();
+            mode4 = !mode4;
             break;
     }
 }
