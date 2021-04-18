@@ -95,6 +95,10 @@ void ofApp::keyPressed(int key){
             setLevelColors();
             mode4 = !mode4;
             break;
+        case '=': //Increases fractal depth.
+            break;
+        case '-': //Decreases fractal depth.
+            break;
     }
 }
 
