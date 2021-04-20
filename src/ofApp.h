@@ -40,9 +40,3 @@ class ofApp : public ofBaseApp{
 		vector<ofColor> colors;
 };
 
-class FractalMode{
-	public:
-		void draw();
-		void setActivate();
-		virtual void getActivate() = 0;
-};
