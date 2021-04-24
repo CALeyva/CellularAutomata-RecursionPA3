@@ -74,19 +74,6 @@ void ofApp::drawMode3(float x, float y, float size, int n, unsigned int icolor){
     drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1, icolor++);
     drawMode3();
 }
-void ofApp::drawMode4(int x, int y, int n, unsigned int icolor){
-    if(n!=0){
-        if (icolor >= colors.size()) icolor = 0;
-        ofSetColor(colors[icolor]);
-        float width = n*(10/(rand() % 15 + 5));
-        float length = n*(10/(rand() % 15 + 5));
-        ofDrawRectangle(x, y, 0, width, length);
-        drawMode4(x+100, y, n-1, icolor++);
-        drawMode4(x-100, y, n-1, icolor++);
-        drawMode4(x, y+100, n-1, icolor++);
-        drawMode4(x, y-100, n-1, icolor++);
-    }
-}
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
