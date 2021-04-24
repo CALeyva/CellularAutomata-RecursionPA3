@@ -30,7 +30,7 @@ void ofApp::drawMode1(int x, int y, int n, unsigned int icolor){
     if(n!=0){
         if (icolor >= colors.size()) icolor = 0;
         ofSetColor(colors[icolor]);
-        ofDrawCircle(x, y, 100);
+        ofDrawCircle(x, y, ((n/4)*100));
         drawMode1(x+100, y, n-1, icolor++);
         drawMode1(x-100, y, n-1, icolor++);
         drawMode1(x, y+100, n-1, icolor++);
@@ -40,10 +40,10 @@ void ofApp::drawMode1(int x, int y, int n, unsigned int icolor){
 void ofApp::drawMode2(int length, int n, int x, int y, int d, unsigned int icolor){
     if(n != 0){
         int middleY = y-length;
-        int leftBranchX = x -length*cos(PI/180*d);
-        int leftBranchY = middleY -length*sin(PI/180*d);
-        int rightBranchX = x +length*cos(PI/180*d);
-        int rightBranchY = middleY -length*sin(PI/180*d);
+        int leftBranchX = x -length*cos(PI/180*(rand() % 20 + 15));
+        int leftBranchY = middleY -length*sin(PI/180*(rand() % 20 + 15));
+        int rightBranchX = x +length*cos(PI/180*(rand() % 20 + 15));
+        int rightBranchY = middleY -length*sin(PI/180*(rand() % 20 + 15));
 
         if (icolor >= colors.size()) icolor = 0;
         ofSetColor(colors[icolor]);
