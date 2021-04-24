@@ -20,6 +20,7 @@ class ofApp : public ofBaseApp{
 		void drawMode1(int x, int y, int n, unsigned int icolor);
 		void drawMode2(int length, int n, int x, int y, int d, unsigned int icolor);
 		void drawMode3(float x, float y, float size, int n, unsigned int icolor);
+		void drawMode4(int x, int y, int n, unsigned int icolor);
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y);
