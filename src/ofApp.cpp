@@ -54,6 +54,8 @@ void ofApp::keyPressed(int key){
         case '-': //Decreases fractal depth.
             levels--;
             break;
+        case ' ':
+            break;
     }
 }
 
