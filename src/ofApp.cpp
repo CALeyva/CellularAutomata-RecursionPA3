@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     setLevelColors();
+    ofSetFrameRate(10);
+    this->fractals[0]->setActivate(true);
 }
 
 //--------------------------------------------------------------
@@ -17,63 +19,14 @@ void ofApp::draw(){
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     ofNoFill();
-    if(mode1){
-        drawMode1(ofGetWidth()/2, ofGetHeight()/2, 4, 0);
-    } if(mode2){
-        drawMode2(200, 10, ofGetWidth()/2, ofGetHeight()-50, 30, 0);
-    } if(mode3) {
-        drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, 10, 0);
+    if(this->fractals[0]->getActivate()){
+        dynamic_cast<CircleFractal*>(this->fractals[0])->draw(ofGetWidth()/2, ofGetHeight()/2, levels, 0, this->colors);
+    } if(this->fractals[1]->getActivate()){
+        dynamic_cast<TreeFractal*>(this->fractals[1])->draw(200, levels, ofGetWidth()/2, ofGetHeight()-50, 30, 0, this->colors);
+    } if(this->fractals[2]->getActivate()) {
+        dynamic_cast<SierpinskiFractal*>(this->fractals[1])->draw(ofGetWidth() / 3, 10, ofGetHeight() / 2, levels, 0, colors);
     }
 }
-
-void ofApp::drawMode1(int x, int y, int n, unsigned int icolor){
-    if(n!=0){
-        if (icolor >= colors.size()) icolor = 0;
-        ofSetColor(colors[icolor]);
-        ofDrawCircle(x, y, 100);
-        drawMode1(x+100, y, n-1, icolor++);
-        drawMode1(x-100, y, n-1, icolor++);
-        drawMode1(x, y+100, n-1, icolor++);
-        drawMode1(x, y-100, n-1, icolor++);
-    }
-}
-void ofApp::drawMode2(int length, int n, int x, int y, int d, unsigned int icolor){
-    if(n != 0){
-        int middleY = y-length;
-        int leftBranchX = x -length*cos(PI/180*d);
-        int leftBranchY = middleY -length*sin(PI/180*d);
-        int rightBranchX = x +length*cos(PI/180*d);
-        int rightBranchY = middleY -length*sin(PI/180*d);
-
-        if (icolor >= colors.size()) icolor = 0;
-        ofSetColor(colors[icolor]);
-        ofDrawLine(x, y, x,y-length);
-        ofDrawLine(x, y-length, rightBranchX, rightBranchY);
-        ofDrawLine(x,y-length, leftBranchX, leftBranchY);
-
-        drawMode2(length/2, n-1,rightBranchX,rightBranchY, 30, icolor++);
-        drawMode2(length/2,n-1,leftBranchX,leftBranchY, 30, icolor++);
-    }
-    
-}
-
-void ofApp::drawMode3(float x, float y, float size, int n, unsigned int icolor){
-    if(n == 0) {
-        return;
-    }
-
-    ofPoint a(x, y);
-    ofPoint b(x + size, y);
-    ofPoint c(x + size / 2, y + ((sqrt(3) * size) / 2));
-
-    if (icolor >= colors.size()) icolor = 0;
-    ofSetColor(colors[icolor]);
-    ofDrawTriangle(a, b, c);
-
-    drawMode3(x, y, size / 2, n - 1, icolor++);
-    drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1, icolor++);
-}
-
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
@@ -81,23 +34,25 @@ void ofApp::keyPressed(int key){
     switch(key){
         case '1':
             setLevelColors();
-            mode1 = !mode1;
+            this->fractals[0]->setActivate(!this->fractals[0]->getActivate());
             break;
         case '2':
             setLevelColors();
-            mode2 = !mode2;
+            this->fractals[1]->setActivate(!this->fractals[1]->getActivate());
             break;
         case '3':
             setLevelColors();
-            mode3 = !mode3;
+            this->fractals[2]->setActivate(!this->fractals[2]->getActivate());
             break;
         case '4':
             setLevelColors();
-            mode4 = !mode4;
+            // this->fractals[3]->setActivate(!this->fractals[3]->getActivate());
             break;
         case '=': //Increases fractal depth.
+            levels++;
             break;
         case '-': //Decreases fractal depth.
+            levels--;
             break;
     }
 }

@@ -1,7 +1,11 @@
 #pragma once
-#include<cmath>
+#include <cmath>
 
 #include "ofMain.h"
+#include "FractalMode.h"
+#include "CircleFractal.h"
+#include "TreeFractal.h"
+#include "SierpinskiFractal.h"
 
 class ofApp : public ofBaseApp{
 	public:
@@ -9,7 +13,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 		
-		// Made directly in header file since used in needs to be defined before setup() call
+		// Made directly in header file since it needs to be defined before setup() call
 		void setLevelColors(){
 			colors.clear();
 			for (int i = 0; i < ofGetHeight(); i++) {
@@ -17,9 +21,9 @@ class ofApp : public ofBaseApp{
 			}
 		}
 		
-		void drawMode1(int x, int y, int n, unsigned int icolor);
-		void drawMode2(int length, int n, int x, int y, int d, unsigned int icolor);
-		void drawMode3(float x, float y, float size, int n, unsigned int icolor);
+		// void drawMode1(int x, int y, int n, unsigned int icolor);
+		// void drawMode2(int length, int n, int x, int y, int d, unsigned int icolor);
+		// void drawMode3(float x, float y, float size, int n, unsigned int icolor);
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y);
@@ -31,12 +35,13 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		int levels;
+		int levels = 4;
 	private:
 		bool mode1 = true;
 		bool mode2 = false;
 		bool mode3 = false;
 		bool mode4 = false;
 		vector<ofColor> colors;
+		vector<FractalMode*> fractals = {new CircleFractal(), new TreeFractal(), new SierpinskiFractal()};
 };
 
