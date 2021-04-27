@@ -69,7 +69,7 @@ void ofApp::keyPressed(int key){
             if(!play) levels++;
             break;
         case '-': //Decreases fractal depth.
-            if(!play) levels--;
+            if(!play and levels>0) levels--;
             break;
         case ' ':
             play = !play;
