@@ -12,7 +12,24 @@ void ofApp::update(){
     /* The update method is called muliple times per second
     It's in charge of updating variables and the logic of our app */
     ofSetBackgroundColor(0,0,0);
-}
+
+    timer = timer + 0.125;
+
+    if(play == true){
+        if(timer == 1){
+            if(check<=10){
+                levels++;
+                check++;
+            }
+            else{
+                check = 0;
+                play = false;
+            }
+        }
+    }
+
+    if(timer == 1){timer = 0;}
+    }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -55,6 +72,9 @@ void ofApp::keyPressed(int key){
             levels--;
             break;
         case ' ':
+            play = !play;
+            levels = 0;
+            check = 0;
             break;
     }
 }

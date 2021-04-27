@@ -36,11 +36,14 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		int levels = 4;
+		long timer = 0;
+		int check = 0;
 	private:
 		bool mode1 = true;
 		bool mode2 = false;
 		bool mode3 = false;
 		bool mode4 = false;
+		bool play = false;
 		vector<ofColor> colors;
 		vector<FractalMode*> fractals = {new CircleFractal(), new TreeFractal(), new SierpinskiFractal()};
 };
