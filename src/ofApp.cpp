@@ -66,7 +66,7 @@ void ofApp::keyPressed(int key){
             // this->fractals[3]->setActivate(!this->fractals[3]->getActivate());
             break;
         case '=': //Increases fractal depth.
-            if(!play) levels++;
+            if(!play and levels<10) levels++;
             break;
         case '-': //Decreases fractal depth.
             if(!play and levels>0) levels--;
