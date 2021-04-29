@@ -52,24 +52,31 @@ void ofApp::keyPressed(int key){
         case '1':
             setLevelColors();
             this->fractals[0]->setActivate(!this->fractals[0]->getActivate());
+            if(mode4) !mode4;
             break;
         case '2':
             setLevelColors();
             this->fractals[1]->setActivate(!this->fractals[1]->getActivate());
+            if(mode4) !mode4;
             break;
         case '3':
             setLevelColors();
             this->fractals[2]->setActivate(!this->fractals[2]->getActivate());
+            if(mode4) !mode4;
             break;
         case '4':
             setLevelColors();
-            // this->fractals[3]->setActivate(!this->fractals[3]->getActivate());
+            this->fractals[3]->setActivate(!this->fractals[3]->getActivate());
+            if(mode1) !mode1;
+            if(mode2) !mode2;
+            if(mode3) !mode3;
             break;
         case '=': //Increases fractal depth.
-            if(!play and levels<10) levels++;
+            if(!play && levels<10) levels++;
+            else if (mode4) levels++;
             break;
         case '-': //Decreases fractal depth.
-            if(!play and levels>0) levels--;
+            if(!play && levels>0) levels--;
             break;
         case ' ':
             play = !play;
