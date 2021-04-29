@@ -33,13 +33,14 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		int levels = 4;
-		long timer = 0;
-		int check = 0;
+		int levels = 4; //Represents the fractal depth. 
+		long timer = 0; //Timer variable used for animating in ofApp::update().
+		int check = 0; //Used to make sure the animation does not surpass 7 fractal depth levels. 
 	private:
-		bool play = false;
+		bool play = false; //Determines whether the animation state is active or not. 
 		bool colorCA = false;
 		vector<ofColor> colors;
 		vector<FractalMode*> fractals = {new CircleFractal(), new TreeFractal(), new SierpinskiFractal(), new CellularAutomata()};
+		//Vector contains all fractal modes. 
 };
 
