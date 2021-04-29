@@ -141,13 +141,10 @@ void CellularAutomata::draw(int levels) {
     } if (this->initialRand != initialCond) {
         this->initialRand = initialCond;
         altered = true;
-    } if (this->ruleColors != setColor) {
-        this->ruleColors = setColor;
-        altered = true;
     } if (altered) {
         altered = false;
         setInitialConditions(this->initialRand);
-    }
+    } if (this->ruleColors != setColor) this->ruleColors = setColor;
     this->cells = generate(rules, levels, this->cells, this->colors);
     gui.draw();
 }
