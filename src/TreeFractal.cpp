@@ -15,7 +15,7 @@ void TreeFractal::draw(int length, int n, int x, int y, int d, unsigned int icol
         ofDrawLine(x, y-length, rightBranchX, rightBranchY);
         ofDrawLine(x,y-length, leftBranchX, leftBranchY);
 
-        this->draw(length/2, n-1,rightBranchX,rightBranchY, 30, icolor++, colors);
-        this->draw(length/2,n-1,leftBranchX,leftBranchY, 30, icolor++, colors);
+        this->draw(length/2, n-1,rightBranchX,rightBranchY, 30, icolor+1, colors);
+        this->draw(length/2,n-1,leftBranchX,leftBranchY, 30, icolor+1, colors);
     }
 }

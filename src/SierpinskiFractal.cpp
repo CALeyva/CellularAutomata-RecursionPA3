@@ -13,8 +13,8 @@ void SierpinskiFractal::draw(float x, float y, float size, int n, unsigned int i
     ofSetColor(colors[icolor]);
     ofDrawTriangle(a, b, c);
 
-    this->draw(x, y, size / 2, n - 1, icolor++, colors);
-    this->draw((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1, icolor++, colors);
+    this->draw(x, y, size / 2, n - 1, icolor+1, colors);
+    this->draw((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1, icolor+1, colors);
     // 2.5 unfinished
-    this->draw((c.x + b.x) / 2, (c.y + b.y) / 2, size / 2, n - 1, icolor++, colors);
+    this->draw((a.x + c.x) / 2, (a.y + c.y) / 2, size / 2, n - 1, icolor+1, colors);
 }

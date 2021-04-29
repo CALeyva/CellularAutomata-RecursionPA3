@@ -12,6 +12,21 @@ void ofApp::update(){
     /* The update method is called muliple times per second
     It's in charge of updating variables and the logic of our app */
     ofSetBackgroundColor(0,0,0);
+
+    timer = timer + 0.02;
+    if (play){
+        if (timer <= 1){
+            if (check <= 7){
+                levels++;
+                check++;
+            }
+            else {
+                check = 0;
+                play = false;
+            }
+        }
+    }
+    if (timer >= 1) timer = 0;
 }
 
 //--------------------------------------------------------------
@@ -19,12 +34,14 @@ void ofApp::draw(){
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     ofNoFill();
-    if(this->fractals[0]->getActivate()){
+    if (this->fractals[0]->getActivate()) {
         dynamic_cast<CircleFractal*>(this->fractals[0])->draw(ofGetWidth()/2, ofGetHeight()/2, levels, 0, this->colors);
-    } if(this->fractals[1]->getActivate()){
+    } if (this->fractals[1]->getActivate()) {
         dynamic_cast<TreeFractal*>(this->fractals[1])->draw(200, levels, ofGetWidth()/2, ofGetHeight()-50, 30, 0, this->colors);
-    } if(this->fractals[2]->getActivate()) {
-        dynamic_cast<SierpinskiFractal*>(this->fractals[1])->draw(ofGetWidth() / 3, 10, ofGetHeight() / 2, levels, 0, colors);
+    } if (this->fractals[2]->getActivate()) {
+        dynamic_cast<SierpinskiFractal*>(this->fractals[2])->draw(ofGetWidth() / 3, 10, ofGetHeight() / 2, levels, 0, colors);
+    } if (this->fractals[3]->getActivate()) {
+        dynamic_cast<CellularAutomata*>(this->fractals[3])->draw(levels, colorCA);
     }
 }
 
@@ -46,15 +63,26 @@ void ofApp::keyPressed(int key){
             break;
         case '4':
             setLevelColors();
-            // this->fractals[3]->setActivate(!this->fractals[3]->getActivate());
+            this->fractals[3]->setActivate(!this->fractals[3]->getActivate());
+            if (this->fractals[3]->getActivate()) {
+                this->fractals[0]->setActivate(false);
+                this->fractals[1]->setActivate(false);
+                this->fractals[2]->setActivate(false);
+            }
             break;
         case '=': //Increases fractal depth.
-            levels++;
+            if (!play) levels++;
             break;
         case '-': //Decreases fractal depth.
-            levels--;
+            if (!play && levels > 0 || !play && this->fractals[3]->getActivate()) levels--;
             break;
         case ' ':
+            play = !play;
+            levels = 0;
+            check = 0;
+            break;
+        case 'c':
+            colorCA = !colorCA;
             break;
     }
 }

@@ -6,6 +6,7 @@
 #include "CircleFractal.h"
 #include "TreeFractal.h"
 #include "SierpinskiFractal.h"
+#include "CellularAutomata.h"
 
 class ofApp : public ofBaseApp{
 	public:
@@ -21,9 +22,6 @@ class ofApp : public ofBaseApp{
 			}
 		}
 		
-		// void drawMode1(int x, int y, int n, unsigned int icolor);
-		// void drawMode2(int length, int n, int x, int y, int d, unsigned int icolor);
-		// void drawMode3(float x, float y, float size, int n, unsigned int icolor);
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y);
@@ -36,12 +34,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		int levels = 4;
+		long timer = 0;
+		int check = 0;
 	private:
-		bool mode1 = true;
-		bool mode2 = false;
-		bool mode3 = false;
-		bool mode4 = false;
+		bool play = false;
+		bool colorCA = false;
 		vector<ofColor> colors;
-		vector<FractalMode*> fractals = {new CircleFractal(), new TreeFractal(), new SierpinskiFractal()};
+		vector<FractalMode*> fractals = {new CircleFractal(), new TreeFractal(), new SierpinskiFractal(), new CellularAutomata()};
 };
 
