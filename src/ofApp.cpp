@@ -53,14 +53,17 @@ void ofApp::keyPressed(int key){
         case '1': 
             setLevelColors();
             this->fractals[0]->setActivate(!this->fractals[0]->getActivate());
+            if (this->fractals[0]->getActivate() && levels > 10) levels = 3;
             break;
         case '2':
             setLevelColors();
             this->fractals[1]->setActivate(!this->fractals[1]->getActivate());
+            if (this->fractals[1]->getActivate() && levels > 10) levels = 3;
             break;
         case '3':
             setLevelColors();
             this->fractals[2]->setActivate(!this->fractals[2]->getActivate());
+            if (this->fractals[2]->getActivate() && levels > 10) levels = 3;
             break;
         case '4':
             setLevelColors();
@@ -72,10 +75,10 @@ void ofApp::keyPressed(int key){
             }
             break;
         case '=': //Increases fractal depth.
-            if (!play) levels++;
+            if ((!play && levels < 10) || (!play && this->fractals[3]->getActivate())) levels++;
             break;
         case '-': //Decreases fractal depth.
-            if (!play && levels > 0 || !play && this->fractals[3]->getActivate()) levels--;
+            if (!play && levels > 0 ) levels--;
             break;
         case ' ': //This activates an animation state, starting from Fractal Depth 0.
             play = !play;
