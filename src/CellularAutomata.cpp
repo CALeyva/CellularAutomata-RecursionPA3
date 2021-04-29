@@ -23,11 +23,19 @@ CellularAutomata::CellularAutomata() {
     setInitialConditions(this->initialRand);
 }
 
-void CellularAutomata::setInitialConditions(bool rand) {
+void CellularAutomata::setInitialConditions(bool random) {
     this->cells.clear();
-    vector<int> row(this->size, 0); // add random to fit entire screen
-    // Modify to get custom initial conditions
-    row[size/2] = 1;
+    vector<int> row;
+    if (!random) {
+        for (int i = 0; i < this->size; i++) {
+            row.push_back(0);
+        }
+        row[size/2] = 1;
+    } else {
+        for (int i = 0; i < this->size; i++) {
+            row.push_back(rand() % 2);
+        }
+    }
     this->cells.push_back(row);
 }
 
@@ -126,33 +134,21 @@ void CellularAutomata::draw_matrix(vector<vector<int>> c, vector<vector<ofColor>
     }
 }
 
-void CellularAutomata::draw(int levels, bool colorCA) { // When change of rule?
+void CellularAutomata::draw(int levels) { // When change of rule?
     bool altered = false;
-    // if (this->cells[cells.size()-1][0] == 1) {
-    //     // this->size += (int) this->size / 4;
-    //     this->cell_size = (int) ofGetWidth() / (this->cell_size + 5);
-    //     changed = true;
-    // } 
     if (levels > (int) ofGetHeight() / this->cell_size) {
         this->cell_size = (int) ofGetHeight() / levels;
         altered = true;
     } if (this->size != (int) ofGetWidth() / this->cell_size) {
         this->size = (int) ofGetWidth() / this->cell_size;
         altered = true;
-    } 
-    // if (this->cells[cells.size()-1][0] == 1 || levels > (int) ofGetHeight() / this->cell_size || this->size != (int) ofGetWidth() / this->cell_size) {
-    //     //this->cell_size = min(min((int) ofGetWidth() / this->size, (int) ofGetHeight() / levels), (int) ofGetWidth() / this->size);
-    //     setInitialConditions();
-    // }
-    if (this->rule != rules) {
+    } if (this->rule != rules) {
         this->rule = rules;
         altered = true;
     } if (this->initialRand != initialCond) {
         this->initialRand = initialCond;
         altered = true;
-    }
-    
-    if (altered) {
+    } if (altered) {
         altered = false;
         setInitialConditions(this->initialRand);
     }

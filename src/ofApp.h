@@ -38,7 +38,6 @@ class ofApp : public ofBaseApp{
 		int check = 0;
 	private:
 		bool play = false;
-		bool colorCA = false;
 		vector<ofColor> colors;
 		vector<FractalMode*> fractals = {new CircleFractal(), new TreeFractal(), new SierpinskiFractal(), new CellularAutomata()};
 };

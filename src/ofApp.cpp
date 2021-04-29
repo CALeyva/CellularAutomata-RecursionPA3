@@ -41,7 +41,7 @@ void ofApp::draw(){
     } if (this->fractals[2]->getActivate()) {
         dynamic_cast<SierpinskiFractal*>(this->fractals[2])->draw(ofGetWidth() / 3, 10, ofGetHeight() / 2, levels, 0, colors);
     } if (this->fractals[3]->getActivate()) {
-        dynamic_cast<CellularAutomata*>(this->fractals[3])->draw(levels, colorCA);
+        dynamic_cast<CellularAutomata*>(this->fractals[3])->draw(levels);
     }
 }
 
@@ -80,9 +80,6 @@ void ofApp::keyPressed(int key){
             play = !play;
             levels = 0;
             check = 0;
-            break;
-        case 'c':
-            colorCA = !colorCA;
             break;
     }
 }
