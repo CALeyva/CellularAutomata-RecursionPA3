@@ -13,8 +13,8 @@ void ofApp::update(){
     It's in charge of updating variables and the logic of our app */
     ofSetBackgroundColor(0,0,0);
 
-    timer = timer + 0.02;
-    if (play){
+    timer = timer + 0.02; //This is the animation code. It increases the level every time the "timer" variable reaches a value of 1.
+    if (play){            //Animation will play out until level 7, where it will deactivate the animation mode and return to depth 0. 
         if (timer <= 1){
             if (check <= 7){
                 levels++;
@@ -41,7 +41,7 @@ void ofApp::draw(){
     } if (this->fractals[2]->getActivate()) {
         dynamic_cast<SierpinskiFractal*>(this->fractals[2])->draw(ofGetWidth() / 3, 10, ofGetHeight() / 2, levels, 0, colors);
     } if (this->fractals[3]->getActivate()) {
-        dynamic_cast<CellularAutomata*>(this->fractals[3])->draw(levels, colorCA);
+        dynamic_cast<CellularAutomata*>(this->fractals[3])->draw(levels);
     }
 }
 
@@ -49,17 +49,21 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     // This method is called automatically when any key is pressed
     switch(key){
-        case '1':
+        //The different fractals can now be activated at the same time. Fractal 4 is recommended to run without any other for an optimal experience. 
+        case '1': 
             setLevelColors();
             this->fractals[0]->setActivate(!this->fractals[0]->getActivate());
+            if (this->fractals[0]->getActivate() && levels > 10) levels = 3;
             break;
         case '2':
             setLevelColors();
             this->fractals[1]->setActivate(!this->fractals[1]->getActivate());
+            if (this->fractals[1]->getActivate() && levels > 10) levels = 3;
             break;
         case '3':
             setLevelColors();
             this->fractals[2]->setActivate(!this->fractals[2]->getActivate());
+            if (this->fractals[2]->getActivate() && levels > 10) levels = 3;
             break;
         case '4':
             setLevelColors();
@@ -71,18 +75,15 @@ void ofApp::keyPressed(int key){
             }
             break;
         case '=': //Increases fractal depth.
-            if (!play) levels++;
+            if ((!play && levels < 10) || (!play && this->fractals[3]->getActivate())) levels++;
             break;
         case '-': //Decreases fractal depth.
-            if (!play && levels > 0 || !play && this->fractals[3]->getActivate()) levels--;
+            if (!play && levels > 0 ) levels--;
             break;
-        case ' ':
+        case ' ': //This activates an animation state, starting from Fractal Depth 0.
             play = !play;
             levels = 0;
             check = 0;
-            break;
-        case 'c':
-            colorCA = !colorCA;
             break;
     }
 }

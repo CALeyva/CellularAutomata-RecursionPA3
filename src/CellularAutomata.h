@@ -11,15 +11,17 @@ class CellularAutomata : public FractalMode{
         vector<int> binaryByte(int num);
         int binary_converter(int dec);
         void draw_matrix(vector<vector<int>> cells, vector<vector<ofColor>> colors, int levels);
-		void draw(int levels, bool colorCA);
+		void draw(int levels);
     private:
         ofxPanel gui;
         ofxIntSlider rules;
         ofxToggle initialCond;
+        ofxToggle setColor;
         vector<vector<int>> cells;
         vector<vector<ofColor>> colors;
         int cell_size = 25;
         int size = (int) ofGetWidth() / this->cell_size;
         int rule = 30;
         bool initialRand = false;
+        bool ruleColors = false;
 };
